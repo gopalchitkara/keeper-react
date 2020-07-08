@@ -1,0 +1,13 @@
+.new-link-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.new-link-body {
+    border: none !important;
+}
+
+.new-link-body:focus {
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}

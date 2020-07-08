@@ -1,0 +1,8 @@
+.saved-list-item {
+    display: flex;
+}
+
+.saved-list-body {
+    height: 140px;
+    overflow: hidden;
+}
