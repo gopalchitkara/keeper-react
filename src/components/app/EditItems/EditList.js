@@ -75,7 +75,7 @@ function EditList({ existingList, cancelEditItem, saveEditedItem, deleteItem }) 
     }
 
     return (
-        <Card size="small" className="new-note ml-10 mr-10" >
+        <Card size="small" className="new-note ml-10 mr-10 radius-5" >
             <div className="new-list-header">
                 <Input
                     placeholder="Title"

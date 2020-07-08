@@ -4,6 +4,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    /* background: rgba(0, 0, 0, 0.5); */
+    background-color: hsla(0, 0%, 89.8%, .75);
     z-index: 101;
 }

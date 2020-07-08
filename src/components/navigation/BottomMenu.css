@@ -1,0 +1,25 @@
+.bottom-menu {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0px;
+    /* display: none !important; */
+    background-color: #ffffff;
+    z-index: 99;
+    border-top: solid 1px rgba(51, 61, 78, 0.18);
+    transition: ease 200ms;
+
+}
+
+@media (max-width: 575.98px) {
+    .bottom-menu {
+        /* display: block !important; */
+        height: 70px;
+    }
+}
+
+
+.sidebar-option.hoverable-up:hover {
+    transform: translateY(-6px);
+}

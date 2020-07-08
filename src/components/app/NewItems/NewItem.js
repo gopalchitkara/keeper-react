@@ -5,7 +5,7 @@ import NewLink from './NewLink';
 import NewList from './NewList';
 import './NewItem.css'
 import { Row, Col } from 'antd';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function NewItem() {
 
@@ -27,10 +27,18 @@ function NewItem() {
     return (
         <Row justify="center" className="new-item-wrapper">
             {newItemType ? (
-                <Col xs={24} sm={20} md={18} lg={14} xl={12} className="pt-20 pb-20">
-                    <div style={{ minHeight: 150 }}>
+                <Col xs={24} sm={20} md={18} lg={14} xl={12} className="pt-20">
+                    <div style={{ minHeight: 161 }}>
                         <AnimatePresence exitBeforeEnter>
-                            <ToggleNewItems toggleType={newItemType} key={Math.random()} />
+                            <motion.div
+                                initial={{ x: 400, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                exit={{ x: 400, opacity: 0 }}
+                                transition={{ duration: 0.2, type: "tween", }}
+                                key={Math.random()}
+                            >
+                                <ToggleNewItems toggleType={newItemType} />
+                            </motion.div>
                         </AnimatePresence>
                     </div>
                 </Col>

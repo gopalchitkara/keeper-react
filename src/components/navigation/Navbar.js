@@ -1,24 +1,50 @@
 import React from 'react'
 import './Navbar.css'
-import { Row, Col, Breadcrumb, Typography } from 'antd';
+import { Row, Col, Breadcrumb, Typography, Dropdown, Menu } from 'antd';
 import { HomeFilled } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { SettingOutlined } from '@ant-design/icons'
 
 const { Text } = Typography;
+
+
+const menu = (
+    <Menu style={{ marginTop: 5, padding: 5 }}>
+        <Menu.Item style={{ padding: "10px 10px" }}>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.gopalchitkara.in/">
+                Contact Me
+            </a>
+        </Menu.Item>
+        {/* <Menu.Item style={{ padding: "10px 10px" }}>
+            <a target="_blank" rel="noopener noreferrer" href="#"
+                onClick={() => {}}
+            >
+                Reset Items to original state.
+            </a>
+        </Menu.Item> */}
+    </Menu>
+);
 
 function Navbar() {
     return (
         <Row align="middle" className="navbar">
-            <Col xs={24} className="pl-20 pr-20">
+            <Col xs={23} className="pl-20 pr-20">
                 <Row align="middle" >
                     <Breadcrumb>
                         <Breadcrumb.Item>
                             <Link to='/'>
-                                <HomeFilled /> <Text strong>Keeper Notes</Text>
+                                <HomeFilled /> <Text strong className="font-poppins">Keeper Notes</Text>
                             </Link>
                         </Breadcrumb.Item>
                     </Breadcrumb>
                 </Row>
+            </Col>
+            <Col xs={1}>
+                <Dropdown overlay={menu} placement="bottomRight"
+                    trigger={['click', 'hover']}
+                >
+                    <SettingOutlined style={{ fontSize: "1.4rem" }} />
+                </Dropdown>
             </Col>
         </Row>
     )

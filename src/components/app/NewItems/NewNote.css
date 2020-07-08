@@ -6,6 +6,8 @@
 
 .new-note-title>input {
     font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem;
 }
 
 .new-note-title.ant-input-affix-wrapper-focused {
@@ -15,6 +17,8 @@
 
 .new-note-body {
     border: none !important;
+    font-size: 1rem;
+    line-height: 1.3;
 }
 
 .new-note-body:focus {

@@ -25,7 +25,7 @@ function Sidebar() {
 
     return (
         <div className="sidebar">
-            <Row style={{ height: "90%" }}>
+            <Row style={{ height: "90%", padding: "15px 5px" }}>
                 <Col xs={24}>
                     <Row>
                         <Col xs={24}>
@@ -35,7 +35,7 @@ function Sidebar() {
                                     onClick={(e) => handleClick(e, 'note')}
                                 >
                                     <FileTextOutlined className="sidebar-options-icon" />
-                                    <p className="sidebar-option-title">Note</p>
+                                    <p className="sidebar-option-title font-poppins">Note</p>
                                 </div>
                             </Row>
                         </Col>
@@ -46,7 +46,7 @@ function Sidebar() {
                                     onClick={(e) => handleClick(e, 'link')}
                                 >
                                     <LinkOutlined className="sidebar-options-icon" />
-                                    <p className="sidebar-option-title">Link</p>
+                                    <p className="sidebar-option-title font-poppins">Link</p>
                                 </div>
                             </Row>
                         </Col>
@@ -57,7 +57,7 @@ function Sidebar() {
                                     onClick={(e) => handleClick(e, 'list')}
                                 >
                                     <ProfileOutlined className="sidebar-options-icon" />
-                                    <p className="sidebar-option-title">List</p>
+                                    <p className="sidebar-option-title font-poppins">List</p>
                                 </div>
                             </Row>
                         </Col>
@@ -72,7 +72,7 @@ function Sidebar() {
                                     onClick={() => { history.push('/trash') }}
                                 >
                                     <DeleteOutlined className="sidebar-options-icon" />
-                                    <p className="sidebar-option-title">Trash</p>
+                                    <p className="sidebar-option-title font-poppins">Trash</p>
                                 </div>
                             </Row>
                         </Col>

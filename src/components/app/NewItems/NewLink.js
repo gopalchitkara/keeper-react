@@ -3,7 +3,6 @@ import { Card, Button, Input, message } from 'antd';
 import { LinkOutlined } from '@ant-design/icons'
 import './NewLink.css';
 import { GlobalStateContext } from '../../../contexts/GlobalStateContext';
-import { motion } from 'framer-motion';
 
 const { TextArea } = Input;
 
@@ -44,47 +43,38 @@ function NewLink() {
                 message.warning('Something went wrong. Please try again.');
                 break;
         }
-
-
     }
 
     return (
-        <motion.div
-            initial={{ x: 400, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: 800, opacity: 0 }}
-            transition={{ duration: 0.2, type: "tween", }}
-        >
-            <Card size="small" className="new-note ml-10 mr-10" style={{ boxShadow: "0 1px 1px 0 rgba(0, 0, 0, 0.08), 0 1px 3px 1px rgba(0, 0, 0, 0.16)" }}>
-                <div className="new-link-header">
-                    <LinkOutlined style={{ fontSize: "1.1rem", marginTop: 6, }} />
-                    <TextArea
-                        rows={4}
-                        className="new-link-body"
-                        placeholder="New Link"
-                        autoSize={{ minRows: 2 }}
-                        value={newLink}
-                        onChange={e => setNewLink(e.target.value)}
-                    />
-                </div>
-                <div className="new-note-footer">
-                    <Button
-                        type="text"
-                        onClick={handleLinkSave}
-                    >
-                        Save
+        <Card size="small" className="new-note ml-10 mr-10 radius-5" style={{ boxShadow: "0 1px 1px 0 rgba(0, 0, 0, 0.08), 0 1px 3px 1px rgba(0, 0, 0, 0.16)" }}>
+            <div className="new-link-header">
+                <LinkOutlined style={{ fontSize: "1.1rem", marginTop: 6, }} />
+                <TextArea
+                    rows={4}
+                    className="new-link-body"
+                    placeholder="New Link"
+                    autoSize={{ minRows: 2 }}
+                    value={newLink}
+                    onChange={e => setNewLink(e.target.value)}
+                />
+            </div>
+            <div className="new-note-footer">
+                <Button
+                    type="text"
+                    onClick={handleLinkSave}
+                >
+                    Save
                 </Button>
-                    <Button
-                        type="text"
-                        className="ml-10"
-                        danger
-                        onClick={discardNewItem}
-                    >
-                        Discard
+                <Button
+                    type="text"
+                    className="ml-10"
+                    danger
+                    onClick={discardNewItem}
+                >
+                    Discard
                 </Button>
-                </div>
-            </Card>
-        </motion.div>
+            </div>
+        </Card>
     )
 }
 

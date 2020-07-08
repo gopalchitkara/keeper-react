@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { GlobalStateContext } from '../../../contexts/GlobalStateContext'
 import { AnimatePresence, motion } from 'framer-motion';
 import './EditItemModal.css';
@@ -15,7 +15,7 @@ function EditItemModal() {
         cancelEditItem,
         saveEditedItem,
         deleteItem
-    } = useContext(GlobalStateContext);
+    } = React.useContext(GlobalStateContext);
 
     const backdrop = {
         visible: { opacity: 1 },
@@ -52,30 +52,31 @@ function EditItemModal() {
 
     return (
         <div>
-            {itemToEdit && itemToEdit.id ? (
+            {itemToEdit && itemToEdit.id && (
                 <AnimatePresence exitBeforeEnter>
-                    {showEditModal ? (
+                    {showEditModal && (
                         <motion.div className="backdrop"
-                            variants={backdrop}
-                            initial="hidden"
-                            animate="visible"
-                            exit="hidden"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
                         >
                             <motion.div
-                                initial={{ y: -500 }}
-                                animate={{ y: 0 }}
-                                exit={{ y: -500 }}
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                exit={{ scale: 0 }}
+                                transition={{ duration: 0.2, type: "tween" }}
+                                key={Math.random()}
                             >
                                 <Row style={{ marginTop: 100 }} justify="center" >
                                     <Col xs={24} sm={20} md={18} lg={14} xl={12} className="pt-20 pb-20">
-                                        <ToggleItemToEdit toggleType={itemToEdit.type} key={Math.random()} />
+                                        <ToggleItemToEdit toggleType={itemToEdit.type} />
                                     </Col>
                                 </Row>
                             </motion.div>
                         </motion.div>
-                    ) : (<></>)}
+                    )}
                 </AnimatePresence>
-            ) : (<></>)
+            )
             }
         </div >
     )

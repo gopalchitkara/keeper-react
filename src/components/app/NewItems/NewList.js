@@ -3,7 +3,6 @@ import { Card, Button, Input, Checkbox, message } from 'antd';
 import { EnterOutlined, DeleteOutlined } from '@ant-design/icons'
 import './NewList.css'
 import { GlobalStateContext } from '../../../contexts/GlobalStateContext';
-import { motion } from 'framer-motion';
 
 function NewList() {
     const [newListTitle, setNewListTitle] = useState('');
@@ -71,13 +70,8 @@ function NewList() {
     }
 
     return (
-        <motion.div
-            initial={{ x: 400, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: 800, opacity: 0 }}
-            transition={{ duration: 0.2, type: "tween", }}
-        >
-            <Card size="small" className="new-note ml-10 mr-10" style={{ boxShadow: "0 1px 1px 0 rgba(0, 0, 0, 0.08), 0 1px 3px 1px rgba(0, 0, 0, 0.16)" }}>
+        <div>
+            <Card size="small" className="new-note ml-10 mr-10 radius-5" style={{ boxShadow: "0 1px 1px 0 rgba(0, 0, 0, 0.08), 0 1px 3px 1px rgba(0, 0, 0, 0.16)" }}>
                 <div className="new-list-header">
                     <Input
                         placeholder="Title"
@@ -132,7 +126,7 @@ function NewList() {
                 </Button>
                 </div>
             </Card>
-        </motion.div>
+        </div>
     )
 }
 

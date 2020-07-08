@@ -66,7 +66,7 @@ function Cell({ item, index, moveItem, setPosition, editItemOnClick }) {
             drag
             dragConstraints={{ top: 0, right: 0, bottom: 0, left: 0 }}
             dragElastic={1}
-            dragTransition={{ min: 0, max: 100, bounceStiffness: 100, bounceDamping: 100 }}
+            dragTransition={{ min: 0, max: 100, bounceStiffness: 80, bounceDamping: 80 }}
             dragOriginX={dragOriginX}
             dragOriginY={dragOriginY}
             onDragStart={() => setDragging(true)}

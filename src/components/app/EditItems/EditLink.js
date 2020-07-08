@@ -24,7 +24,7 @@ function EditLink({ link, cancelEditItem, saveEditedItem, deleteItem }) {
     }
 
     return (
-        <Card size="small" className="new-note ml-10 mr-10" >
+        <Card size="small" className="new-note ml-10 mr-10 radius-5" >
             <div className="new-link-header">
                 <LinkOutlined style={{ fontSize: "1.1rem", marginTop: 6, }} />
                 <TextArea
