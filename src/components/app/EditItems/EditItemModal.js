@@ -17,11 +17,6 @@ function EditItemModal() {
         deleteItem
     } = React.useContext(GlobalStateContext);
 
-    const backdrop = {
-        visible: { opacity: 1 },
-        hidden: { opacity: 0 }
-    }
-
     function ToggleItemToEdit({ toggleType }) {
         switch (toggleType) {
             case 'note':
