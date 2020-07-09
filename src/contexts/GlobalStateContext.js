@@ -10,13 +10,14 @@ export const GlobalStateContextProvider = (props) => {
     const [itemToEdit, setItemToEdit] = useState();
     const [checkingSavedItems, setCheckingSavedItems] = useState(true);
     const [checkingTrashStatus, setCheckingTrashStatus] = useState(true);
+    const [isDraggingGlobal, setIsDraggingGlobal] = useState(false);
 
-    useEffect(() => {
-        var initStateItems = [
+    const initState = {
+        stateItems: [
             { id: Math.floor(Math.random() * 100000), type: 'note', title: 'Welcome to keeper!', body: 'Hello! Welcome to keeper. This is a simple clone of google keep but with a different and custom UI. Currently, keeper can store Simple Notes, Links and Check Lists. This here is an example of a simple note.', createdAt: new Date() },
-            { id: Math.floor(Math.random() * 100000), type: 'note', title: 'Adding Items.', body: 'Adding new items in keeper is very easy. Just click on any button in the left sidebar and by the way, did you check my website? no? the item to the right is a link. go ahead and click on it!', createdAt: new Date() },
+            { id: Math.floor(Math.random() * 100000), type: 'note', title: 'Adding Items.', body: 'Adding new items in keeper is very easy. Just click on any button in the left sidebar or bottom app bar (for mobile devices) and by the way, did you check my website? no? the next item is a link. go ahead and click on it!', createdAt: new Date() },
             { id: Math.floor(Math.random() * 100000), type: 'link', linkAddress: 'https://gopalchitkara.in/', createdAt: new Date() },
-            { id: Math.floor(Math.random() * 100000), type: 'note', title: 'Arranging and Updating Items', body: 'Keeper supports drag and drop to easily arrange the items as required and to edit an item just click on an item card.', createdAt: new Date() },
+            { id: Math.floor(Math.random() * 100000), type: 'note', title: 'Arranging and Updating Items', body: 'Keeper supports drag and drop to easily arrange the items. Go to settings menu on the top right to enable it. To Edit an item, just click on it.', createdAt: new Date() },
             {
                 id: Math.floor(Math.random() * 100000), type: 'list', title: 'Intro to keeper.',
                 listItems: [
@@ -29,24 +30,8 @@ export const GlobalStateContextProvider = (props) => {
                 , createdAt: new Date()
             },
             { id: Math.floor(Math.random() * 100000), type: 'note', title: 'To Note', body: 'Since Keeper is a practice project, it uses the local storage of your browser so, the data is stored on your machine and not on any remote server yet.', createdAt: new Date() },
-        ]
-        let savedItems;
-        try {
-            savedItems = JSON.parse(localStorage.getItem('keeperItems'));
-            if (!savedItems) {
-                localStorage.setItem('keeperItems', JSON.stringify(initStateItems));
-                savedItems = initStateItems;
-            }
-        } catch (error) {
-            console.log('ERROR OCCURED WHILE STATE INITIALIZATION');
-        } finally {
-            setStateItems(savedItems);
-            setCheckingSavedItems(false);
-        }
-    }, [])
-
-    useEffect(() => {
-        var initTrash = [
+        ],
+        trashItems: [
             {
                 id: Math.floor(Math.random() * 100000),
                 body: "this is a deleted note",
@@ -55,18 +40,37 @@ export const GlobalStateContextProvider = (props) => {
                 title: "deleted note.",
                 type: "note",
             }
-        ];
-        let trashItems;
+        ]
+    }
+
+    useEffect(() => {
+        let savedItemsLocal;
         try {
-            trashItems = JSON.parse(localStorage.getItem('keeperTrash'));
-            if (!trashItems) {
-                localStorage.setItem('keeperTrash', JSON.stringify(initTrash));
-                trashItems = initTrash;
+            savedItemsLocal = JSON.parse(localStorage.getItem('keeperItems'));
+            if (!savedItemsLocal) {
+                setStateItems(initState.stateItems);
+            } else {
+                setStateItems(savedItemsLocal);
+            }
+        } catch (error) {
+            console.log('ERROR OCCURED WHILE STATE INITIALIZATION');
+        } finally {
+            setCheckingSavedItems(false);
+        }
+    }, [])
+
+    useEffect(() => {
+        let trashItemsLocal;
+        try {
+            trashItemsLocal = JSON.parse(localStorage.getItem('keeperTrash'));
+            if (!trashItemsLocal) {
+                setTrash(initState.trashItems);
+            } else {
+                setTrash(trashItemsLocal);
             }
         } catch (error) {
             console.log('ERROR OCCURED WHILE TRASH INITIALIZATION');
         } finally {
-            setTrash(trashItems);
             setCheckingTrashStatus(false);
         }
     }, [])
@@ -78,6 +82,11 @@ export const GlobalStateContextProvider = (props) => {
     useEffect(() => {
         localStorage.setItem('keeperTrash', JSON.stringify(trash));
     }, [trash])
+
+    const resetToOriginalState = () => {
+        setStateItems(initState.stateItems);
+        setTrash(initState.trashItems);
+    }
 
     const initiateNewItemAddition = (itemType) => {
         setNewItemType(itemType);
@@ -183,7 +192,10 @@ export const GlobalStateContextProvider = (props) => {
             itemToEdit,
             cancelEditItem,
             saveEditedItem,
-            deleteItem
+            deleteItem,
+            setIsDraggingGlobal,
+            isDraggingGlobal,
+            resetToOriginalState
         }} >
             {props.children}
         </GlobalStateContext.Provider>

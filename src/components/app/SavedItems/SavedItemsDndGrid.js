@@ -50,7 +50,7 @@ const flat = {
     transition: { delay: 0.3 },
 }
 
-function Cell({ item, index, moveItem, setPosition, editItemOnClick }) {
+function Cell({ item, index, moveItem, setPosition, editItemOnClick, isDraggingGlobal }) {
     const ref = useRef()
     const dragOriginX = useMotionValue(0)
     const dragOriginY = useMotionValue(0)
@@ -63,10 +63,10 @@ function Cell({ item, index, moveItem, setPosition, editItemOnClick }) {
             ref={ref}
             animate={dragging ? onTop : flat}
             transition={{ type: "tween" }}
-            drag
+            drag={isDraggingGlobal}
             dragConstraints={{ top: 0, right: 0, bottom: 0, left: 0 }}
             dragElastic={1}
-            dragTransition={{ min: 0, max: 100, bounceStiffness: 80, bounceDamping: 80 }}
+            dragTransition={{ min: 0, max: 100, bounceStiffness: 100, bounceDamping: 100 }}
             dragOriginX={dragOriginX}
             dragOriginY={dragOriginY}
             onDragStart={() => setDragging(true)}
@@ -87,7 +87,7 @@ function Cell({ item, index, moveItem, setPosition, editItemOnClick }) {
             className="grid-item"
             onClick={(e) => editItemOnClick(e, item)}
         >
-            <div className="grid-item-content">
+            <div className="grid-item-content noselect">
                 <SavedItemToShow item={item} key={item.id} />
             </div>
         </motion.div>
@@ -108,7 +108,7 @@ function SavedItemToShow({ item }) {
 }
 
 function SavedItemsDndGrid() {
-    const { checkingSavedItems, stateItems, setStateItems, editItem } = useContext(GlobalStateContext);
+    const { checkingSavedItems, stateItems, setStateItems, editItem, isDraggingGlobal } = useContext(GlobalStateContext);
 
     const editItemOnClick = (e, item) => {
         e.preventDefault();
@@ -166,6 +166,7 @@ function SavedItemsDndGrid() {
                                         moveItem={moveItem}
                                         setPosition={setPosition}
                                         editItemOnClick={editItemOnClick}
+                                        isDraggingGlobal={isDraggingGlobal}
                                     />
                                 ))}
                             </div>
